@@ -1,6 +1,9 @@
 # PRGC 
-Nezapomeň ;
-
+## TLDR
+-Nezapomeň ;
+- &foo [ampersand], kde foo je var vrací adresu dané proměnné
+- *foo [asterisk], kde foo je pointer, vrací hodnotu uloženou na adrese uložené ve foo
+- *Ternární operátor* 'vyraz' ? 'kod pro vyraz true' : 'kod pro vyraz false'
 ## Header files/libraries/includes
 - <stdlib.h>
 - <stdio.h> = standard input & output
@@ -12,6 +15,9 @@ Nezapomeň ;
     - `fgets(varName, sizeof(varName), stdin)`
         - `getchar(void)` - užitečné, pokud z předchozích vstupů zůstává ve frontě \n. Tato funkce ho načte a tedy odstraní
         - načtení řádku z textového vstupu
+    - `fprintf`
+        - formátované vypisování do daného kanálu/souboru. 
+        - užití *stdout*, *stderr*
 - <string.h>
     - přidává funkce pro práci se stringy
     - `strlen(name)` - vrací délku stringu
@@ -20,19 +26,44 @@ Nezapomeň ;
     - `sqrt()`,`pwr(x,pwr)`
 
 - <stdbool.h> = importuje datatyp bool
+- <limits.h> = zadefinované min/max hodnoty datatypů
+- <stdlib.h> = užitečné kravinky, např:
+    - EXIT_SUCCESS, EXIT_FAILURE
 
-## Variables
-
+## Datatypy
+`sizeof(int)` - vrací velikost datatypu/výrazu
 ```c
 char pismeno = 'a'; // 1b
-char jmeno[] = "takhle se v c dělá string";
+char jmeno[] = "takhle se v c dělá string"; // v paměti zakončený '\0'
 // pro char jsou '' závorky, pro string ""
 int cislo = 42; // 4b
-float pi = 3.141592f; // 4b
+float pi = 3.141592f; // 4b, to "f" je důležitý
 double e = 2.7116811354; // 8b
 bool anoNe = true; // vyžaduje include <stdbool.h>,
 bool n = 0; // 1b
+
+signed / unsigned int // se znaménkem nebo bez. 
+// unsigned nemůže být záporný
 ```
+- velikosti nejsou přesně dány, jsou jen jejich vztahy (int < long), záleží na HW a kompileru
+
+### Literály
+**Znakové** 
+- 'A', 'B', '\n'
+- hodnota literálu je ASCII číslo
+
+**Řetězcové**
+- "Text s koncem\n"
+
+**Výčtové** - enum
+= sada pojmenovaných int
+```c
+enum{
+    SPADES,
+    CLUBS
+};
+```
+
 
 ## Format specifiers
 Určují jak se zobrazují a interpretují hodnoty 
@@ -65,4 +96,30 @@ printf("%+010.4f", pi);
 - %lf = double (*long float*) (default 6 des. míst, max 16)
 - %c = char
 - %s = char[] (string)
+- %x	a hexadecimal (base 16) integer
+- %p	an address (or pointer)
+- %f	a floating point number for floats
+- %u	int unsigned decimal
 
+## Compilery
+`gcc main.c -o main`
+-E - spustí pouze preprcesor
+-o jmeno = linkuje výstup do souboru daného jména
+
+info o souboru
+file, vdd
+
+## main
+```c
+int main(int argc, char *argv[] ){ // počet vstupů, pointr k array vstupů
+
+}
+```
+
+## Funkce
+deklarace = void foo(params);
+definice = void foo(params){ *tělo fce*}
+návratový typ i argumenty můžou být prázdné
+`void foo(void);`
+### Keywords
+static = viditelné pouze v daném bloku (souboru)
