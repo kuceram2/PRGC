@@ -1,10 +1,15 @@
 #include <stdbool.h>
 #include <stdio.h>
 
+// bounds of input interval
+#define MAX 10000
+#define MIN -10000
+
+#define INTERVAL_ERR 100
+#define DIVISION_ERR 101
+
 bool read_numbers(int *a, int *b)
 {
-    const int MAX = 10000;
-    const int MIN = -10000;
     int inputOk;
     inputOk = scanf("%d %d", a, b);
 
@@ -51,22 +56,18 @@ int print_average(int *num1, int *num2)
 
 int main()
 {
-
-    {
-        int foo = 4;
-    }
-
     int num1;
     int num2;
     bool divisionPossible;
 
-    if (!read_numbers(&num1, &num2)) return 100;
+    if (!read_numbers(&num1, &num2))
+        return INTERVAL_ERR;
 
     print_output(&num1, &num2);
     divisionPossible = do_division(&num1, &num2);
     print_average(&num1, &num2);
     if (!divisionPossible) {
-        return 101;
+        return DIVISION_ERR;
     }
 
     return 0;
